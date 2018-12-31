@@ -26,15 +26,15 @@ with open_database('GeoLite2-City.mmdb') as db:
 				a["CC"] = match.country
 				if match.country in country_dict:
 					country_dict[match.country] +=1
+				else:
+					country_dict[match.country] =1
 			else:
 				unknown_data.append(a)
 
+country_dict['GB'] = country_dict.pop('UK',None)
+
 for c in country_dict:
-	if c == "UK":
-		country_dict['GB'] = country_dict.pop(c)
-		c = 'GB'
-	else:
-		print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
+	print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
 
 # for u in unknown_data:
 # 	print u["Email Address"] + ": " + u["CONFIRM_IP"]
