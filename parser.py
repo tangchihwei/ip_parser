@@ -34,6 +34,6 @@ with open_database('GeoLite2-City.mmdb') as db:
 
 print country_dict
 
-# for u in unknown_data:
-# 	print u["Email Address"]
+for u in unknown_data:
+	print u["Email Address"] + ": " + u["CONFIRM_IP"]
 			
