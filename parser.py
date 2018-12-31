@@ -34,7 +34,8 @@ with open_database('GeoLite2-City.mmdb') as db:
 country_dict['GB'] = country_dict.pop('UK',None)
 
 for c in country_dict:
-	print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
+	if c:
+		print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
 
 # for u in unknown_data:
 # 	print u["Email Address"] + ": " + u["CONFIRM_IP"]
