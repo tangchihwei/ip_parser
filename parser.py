@@ -37,6 +37,7 @@ country_dict['GB'] = country_dict.pop('UK',None)
 for c in country_dict:
 	if c:
 		print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
+		print str(country_dict[c])
 
 with open_database('GeoLite2-City.mmdb') as db:
 	for a in csv_data:
@@ -62,9 +63,18 @@ with open_database('GeoLite2-City.mmdb') as db:
 			else:
 				unknown_data.append(a)
 
-for r in region_dict:
-	print r + " : " + str(region_dict[r])
+# for r in region_dict:
+# 	print r + " : " + str(region_dict[r])
 
 # for u in unknown_data:
 # 	print u["Email Address"] + ": " + u["CONFIRM_IP"]
-			
+state_dict = {}
+for d in csv_data:
+	if d["CC"] == "US" or d["CC"] == "CA":
+		if d["REGION"] in state_dict:
+			state_dict[d["REGION"]] += 1
+		else:
+			state_dict[d["REGION"]] = 1
+
+# for s in state_dict:
+# 	print s + "," + str(state_dict[s])
