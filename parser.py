@@ -42,24 +42,28 @@ with open_database('GeoLite2-City.mmdb') as db:
 	for a in csv_data:
 		if a["REGION"]:
 			r = a["REGION"]
-
+			# print r
 			if r in region_dict:
-				region_dict[cc] +=1
+				region_dict[r] +=1
 			else:
-				region_dict[cc] = 1
+				region_dict[r] = 1
 		else:
 			c = a["CONFIRM_IP"]
 			match = geolite2.lookup(c)
 			if match:
-				a["REGION"] = match.subdivisions
-				if match.subdivisions in region_dict:
-					region_dict[match.country] +=1
+				# print type(match.subdivisions)
+				for d in match.subdivisions:
+					r = str(d)
+				a["REGION"] = r
+				if r in region_dict:
+					region_dict[r] +=1
 				else:
-					region_dict[match.country] =1
+					region_dict[r] =1
 			else:
 				unknown_data.append(a)
 
-
+for r in region_dict:
+	print r + " : " + str(region_dict[r])
 
 # for u in unknown_data:
 # 	print u["Email Address"] + ": " + u["CONFIRM_IP"]
