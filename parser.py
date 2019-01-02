@@ -34,10 +34,10 @@ with open_database('GeoLite2-City.mmdb') as db:
 
 country_dict['GB'] = country_dict.pop('UK',None)
 
-for c in country_dict:
-	if c:
-		print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
-		print str(country_dict[c])
+# for c in country_dict:
+# 	if c:
+# 		print pycountry.countries.get(alpha_2=c).name + " : " + str(country_dict[c])
+		# print str(country_dict[c])
 
 with open_database('GeoLite2-City.mmdb') as db:
 	for a in csv_data:
@@ -77,4 +77,4 @@ for d in csv_data:
 			state_dict[d["REGION"]] = 1
 
 # for s in state_dict:
-# 	print s + "," + str(state_dict[s])
+# 	print pycountry.subdivisions.get(code = "US-"+s).name + " : " + str(country_dict[c])
